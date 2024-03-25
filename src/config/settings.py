@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class BaseAppSettings(BaseSettings):
@@ -8,7 +8,7 @@ class BaseAppSettings(BaseSettings):
 
     # URL description
     regular_url_standart: str = "RFC 3986 (http://tools.ietf.org/html/rfc3986)"
-    regular_url: str = '(((\w+):)?\/\/)?((\w+)(:\w+)?@)?((\w|\.|\-)+\.\w+)(:\d+)?[^"]*'
+    regular_url: str = r'(((\w+):)?\/\/)?((\w+)(:\w+)?@)?((\w|\.|\-)+\.\w+)(:\d+)?[^"]*'
     regular_url_group: int = 7
 
     # Mongo DB
@@ -20,9 +20,7 @@ class BaseAppSettings(BaseSettings):
     mongodb_tls_ca_file: str = ""
     visited_domain_collection: str = "visited_domain"
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
 
 settings = BaseAppSettings()
