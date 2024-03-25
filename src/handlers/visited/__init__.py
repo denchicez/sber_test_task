@@ -1,0 +1,2 @@
+from .visited_links_handler import save_visited_links_handler
+from .visited_domains_handler import get_visited_domains_handler
